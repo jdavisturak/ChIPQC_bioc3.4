@@ -228,7 +228,7 @@ sampleQC <- function(bamFile,bedFile=NULL,blklist=NULL,ChrOfInterest=NULL,GeneAn
       }
       if(!is.null(bedFile)){
         CountsTemp <- countOverlaps(bedRanges,Sample_GIT)
-        Counts  <- c(Counts,CountsTemp)
+        Counts  <- c(Counts,CountsTemp[CountsTemp!=0])
         bedRangesTemp <- c(bedRangesTemp,bedRanges)
         if(verboseT == TRUE){
           
