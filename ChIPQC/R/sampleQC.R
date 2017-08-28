@@ -228,6 +228,7 @@ sampleQC <- function(bamFile,bedFile=NULL,blklist=NULL,ChrOfInterest=NULL,GeneAn
       }
       if(!is.null(bedFile)){
         CountsTemp <- countOverlaps(bedRanges,Sample_GIT)
+        cat ("Counts temp", CountsTemp)
         Counts  <- c(Counts,CountsTemp[CountsTemp!=0])
         bedRangesTemp <- c(bedRangesTemp,bedRanges)
         if(verboseT == TRUE){
@@ -240,6 +241,9 @@ sampleQC <- function(bamFile,bedFile=NULL,blklist=NULL,ChrOfInterest=NULL,GeneAn
         updatedRanges  <- resize(bedRangesSummits,Window,"center")
         AllCov <- coverage(AllFragRanges,width=unname(ChrLengths[k])+Window)
         CoverageMatrix <- rbind(CoverageMatrix,matrix(as.vector(AllCov[[which(names(AllCov) == names(ChrLengths)[k])]][ranges(updatedRanges[start(updatedRanges) > 0 & seqnames(updatedRanges) == names(ChrLengths)[k]])]),ncol=Window,byrow=TRUE))
+        cat("Counts: ",length(Counts),"\n",Counts, "\n")
+        cat("bedRangesSummitsTemp: ",length(bedRangesSummitsTemp),"\n",bedRangesSummitsTemp, "\n")
+
       }
     }
   }
