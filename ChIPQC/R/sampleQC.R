@@ -228,7 +228,7 @@ sampleQC <- function(bamFile,bedFile=NULL,blklist=NULL,ChrOfInterest=NULL,GeneAn
       }
       if(!is.null(bedFile)){
         CountsTemp <- countOverlaps(bedRanges,Sample_GIT)
-        # Counts  <- c(Counts,CountsTemp)
+        Counts  <- c(Counts,CountsTemp)
         bedRangesTemp <- c(bedRangesTemp,bedRanges)
         if(verboseT == TRUE){
           
@@ -299,8 +299,11 @@ sampleQC <- function(bamFile,bedFile=NULL,blklist=NULL,ChrOfInterest=NULL,GeneAn
     if (nrow(CoverageMatrix) > 0){
       AvProfile <- colMeans(CoverageMatrix)
       NormAvProfile <- (AvProfile/FlagTagCounts[4])*1e6
-      Counts  <- c(Counts,CountsTemp)
+      cat("Counts: ",length(Counts),"\n",Counts, "\n")
+      cat("bedRangesSummitsTemp: ",length(bedRangesSummitsTemp),"\n",bedRangesSummitsTemp, "\n")
+
       elementMetadata(bedRangesTemp) <- data.frame(Counts,bedRangesSummitsTemp)
+
       #print(length(GRangesOfInterestList))
       ReadsInPeaks <- sum(GFCountsMatrix[,"Peaks"])
     }else{
