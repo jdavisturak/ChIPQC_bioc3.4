@@ -228,7 +228,7 @@ sampleQC <- function(bamFile,bedFile=NULL,blklist=NULL,ChrOfInterest=NULL,GeneAn
       }
       if(!is.null(bedFile)){
         CountsTemp <- countOverlaps(bedRanges,Sample_GIT)
-        cat ("Counts temp", CountsTemp)
+        # cat ("Counts temp", CountsTemp)
         if (length(CountsTemp) == 1){
           if (CountsTemp[1] == 0)
             CountsTemp = numeric(0)
@@ -245,8 +245,8 @@ sampleQC <- function(bamFile,bedFile=NULL,blklist=NULL,ChrOfInterest=NULL,GeneAn
         updatedRanges  <- resize(bedRangesSummits,Window,"center")
         AllCov <- coverage(AllFragRanges,width=unname(ChrLengths[k])+Window)
         CoverageMatrix <- rbind(CoverageMatrix,matrix(as.vector(AllCov[[which(names(AllCov) == names(ChrLengths)[k])]][ranges(updatedRanges[start(updatedRanges) > 0 & seqnames(updatedRanges) == names(ChrLengths)[k]])]),ncol=Window,byrow=TRUE))
-        cat("Counts: ",length(Counts),"\n",Counts, "\n")
-        cat("bedRangesSummitsTemp: ",length(bedRangesSummitsTemp),"\n",bedRangesSummitsTemp, "\n")
+        # cat("Counts: ",length(Counts),"\n",Counts, "\n")
+        # cat("bedRangesSummitsTemp: ",length(bedRangesSummitsTemp),"\n",bedRangesSummitsTemp, "\n")
 
       }
     }
@@ -307,8 +307,8 @@ sampleQC <- function(bamFile,bedFile=NULL,blklist=NULL,ChrOfInterest=NULL,GeneAn
     if (nrow(CoverageMatrix) > 0){
       AvProfile <- colMeans(CoverageMatrix)
       NormAvProfile <- (AvProfile/FlagTagCounts[4])*1e6
-      cat("Counts: ",length(Counts),"\n",Counts, "\n")
-      cat("bedRangesSummitsTemp: ",length(bedRangesSummitsTemp),"\n",bedRangesSummitsTemp, "\n")
+      # cat("Counts: ",length(Counts),"\n",Counts, "\n")
+      # cat("bedRangesSummitsTemp: ",length(bedRangesSummitsTemp),"\n",bedRangesSummitsTemp, "\n")
 
       elementMetadata(bedRangesTemp) <- data.frame(Counts,bedRangesSummitsTemp)
 
